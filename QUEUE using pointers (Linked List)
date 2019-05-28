@@ -1,0 +1,101 @@
+#include<iostream>
+using namespace std;
+struct node
+{
+    int data;
+    struct node* next;
+};
+node* front = NULL;
+node* rear = NULL;
+void insert(int element)
+{
+    node* temp = new node();
+    temp ->data = element;
+    temp ->next = NULL;
+    if(front==NULL && rear==NULL)
+    {
+        front = rear = temp ;
+        return;
+    }
+    rear ->next = temp;
+    rear = temp;
+}
+void remove()
+{
+    node* temp = front;
+    if(front==NULL)
+    {
+        return;
+    }
+    else if (front==rear)
+    {
+        front = rear = NULL;
+    }
+    else
+    {
+        front = front ->next;
+    }
+}
+void print()
+{
+    node* temp = front;
+    cout<<"Queue is : ";
+    while (temp != NULL)
+    {
+        cout<<temp ->data;
+        temp = temp ->next;
+        cout<<" ";
+    }
+    cout<<"\n";
+}
+int main()
+{
+    cout<<"How many elements : ";
+    int size , element , cut;
+    char id;
+    cin>>size;
+    for(int i=0 ; i<size ; i++)
+    {
+        cout<<"Enter the element : ";
+        cin>>element;
+        insert(element);
+        print();
+        if(i==size-1)
+        {
+            cout<<"Do you want to insert or delete the element (Lowercase : i/d) :";
+            cin>>id;
+            if(id==105)
+            {
+                size=size+1;
+                cout<<"Enter the element : ";
+                cin>>element;
+                insert(element);
+                print();
+            }
+            else if (id==100)
+            {
+                cout<<"How many elements do you want to remove : ";
+                cin>>cut;
+                if(cut>=size)
+                {
+                    cout<<"Deletion not possible .";
+                }
+                else
+                {
+                    for(int i=0 ; i<cut ; i++)
+                    {
+                    remove();
+                    }
+                    print();
+                }
+            }
+            else
+            {
+                cout<<"Wrong input ";
+                exit;
+            }
+            
+            
+        }
+    }
+}
