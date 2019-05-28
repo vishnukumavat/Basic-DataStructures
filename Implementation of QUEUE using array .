@@ -1,0 +1,90 @@
+#include<iostream>
+using namespace std;
+#define MAX_SIZE 100
+int array[MAX_SIZE];
+int front = -1 ;
+int rear = -1 ;
+void insert(int element)
+{
+    if(rear == MAX_SIZE - 1)
+    {
+        cout<<"Queue is full , element can not be inserted .";
+        return;
+    }
+    else if (front==-1 && rear==-1)
+    {
+        front = rear = 0;
+    }
+    else
+    {
+        rear++;
+    }
+    array[rear] = element;
+}
+void remove()
+{
+    if(front==-1 && rear==-1)
+    {
+        cout<<"Queue is empty element can not be deleted .";
+        return;
+    }
+    else if (front==rear)
+    {
+        front = rear = -1;
+    }
+    else
+    {
+        front++;
+    }
+}
+void print()
+{
+    cout<<"Queue is : ";
+    for(int i=front ; i<=rear ; i++)
+    {
+        cout<<array[i];
+        cout<<" ";
+    }
+    cout<<"\n";
+}
+int main()
+{
+    int size , element;
+    char id;
+    cout<<"Enter the size of queue : ";
+    cin>>size;
+    for(int i=0 ; i<size ; i++)
+    {
+        cout<<"Enter the element : ";
+        cin>>element;
+        insert(element);
+        print();
+        if(i==size-1)
+        {
+            cout<<"What do you want to do isert or delete (i/d) : ";
+            cin>>id;
+            if(id==105)
+            {
+                cout<<"Enter the element to be inserted : ";
+                cin>>element;
+                insert(element);
+                cout<<"Element successfully inserted in queue.... \n";
+                cout<<"The new ";
+                print();
+            }
+            else if (id==100)
+            {
+                remove();
+                cout<<"Element successfully deleted from queue.... \n";
+                cout<<"The new ";
+                print();
+            }
+            else
+            {
+                cout<<"Wrong input";
+                exit;
+            }
+            
+        }
+    }
+}
