@@ -1,0 +1,86 @@
+#include<iostream>
+using namespace std;
+struct node
+{
+    int data;
+    node* address;
+};
+struct node* head;
+void insert(int element)
+{
+    node* block = new node();
+    block ->data = element;
+    block ->address = head;
+    head = block;
+}
+void remove()
+{
+    node* block = head;
+    head = head ->address;
+    free(block);
+}
+void print()
+{
+    node* block = head;
+    cout<<"List is : ";
+    while (block != NULL)
+    {
+        cout<<block ->data;
+        block = block ->address;
+        cout<<" ";
+    }
+    cout<<"\n";
+    
+}
+int main()
+{
+    head = NULL;
+    cout<<"How many elements : ";
+    int size , element , cut;
+    char id;
+    cin>>size;
+    for(int i=0 ; i<size ; i++)
+    {
+        cout<<"Enter the element : ";
+        cin>>element;
+        insert(element);
+        print();
+        if(i==size-1)
+        {
+            cout<<"Do you want to insert or delete the element (Lowercase : i/d) :";
+            cin>>id;
+            if(id==105)
+            {
+                size=size+1;
+                cout<<"Enter the element : ";
+                cin>>element;
+                insert(element);
+                print();
+            }
+            else if (id==100)
+            {
+                cout<<"How many elements do you want to remove : ";
+                cin>>cut;
+                if(cut>=size)
+                {
+                    cout<<"Deletion not possible .";
+                }
+                else
+                {
+                    for(int i=0 ; i<cut ; i++)
+                    {
+                    remove();
+                    }
+                    print();
+                }
+            }
+            else
+            {
+                cout<<"Wrong input ";
+                exit;
+            }
+            
+            
+        }
+    }
+}
