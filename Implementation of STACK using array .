@@ -1,0 +1,90 @@
+#include<iostream>
+using namespace std;
+#define MAX_SIZE 100
+int array[MAX_SIZE];
+int top = -1 ;
+void push(int element)
+{
+    if(top == MAX_SIZE-1)
+    {
+        cout<<"Stack overflow (stack is full ) element can not be inserted\n";
+        return;
+    }
+    else
+    {
+        top++;
+        array[top] = element;
+    }
+    
+}
+void pop()
+{
+    if(top == -1)
+    {
+        cout<<"Stack underflow (stack is empty) elements cannot be deleted \n";
+        return;
+    }
+    else
+    {
+        top--;
+    }
+    
+}
+void print()
+{
+    cout<<"Stack is : ";
+    for(int i=0 ; i<=top ; i++)
+    {
+        cout<<array[i];
+        cout<<" ";
+    }
+    cout<<"\n";
+}
+int main()
+{
+    int size , element , del;
+    char id;
+    cout<<"Enter the size of stack :";
+    cin>>size;
+    for(int i=0 ; i<size ; i++)
+    {
+        cout<<"Enter the element : ";
+        cin>>element;
+        push(element);
+        print();
+        if(i==size-1)
+        {
+            cout<<"Do you want to insert or delete the element (i/d) : ";
+            cin>>id;
+            if(id == 105)
+            {
+                size = size+1;
+                cout<<"Enter the element to be inserted : ";
+                cin>>element;
+                push(element);
+                cout<<"Element successfully inserted in stack ...";
+                cout<<"\nThe new ";
+                print();
+            }
+            else if (id == 100)
+            {
+                cout<<"How many elements do you want to delete : ";
+                cin>>del;
+                for(int i=0 ; i<del ; i++)
+                {
+                    pop();
+                }
+                cout<<"Elements successfully deleted from stack ...";
+                cout<<"\nThe new ";
+                print();
+            }
+            else
+            {
+                cout<<"Wrong input ";
+                exit;
+            }
+            
+            
+        }
+    }
+}
